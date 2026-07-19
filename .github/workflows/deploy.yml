@@ -34,10 +34,22 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build monorepo and Playground
+      - name: Build packages in dependency order
         run: |
-          npm run build
+          # 1. Build @aether/kdl first (no internal dependencies)
+          npm run build --workspace=@aether/kdl
+
+          # 2. Build @aether/core (depends on @aether/kdl)
+          npm run build --workspace=@aether/core
+
+          # 3. Build @aether/adapters and @aether/cli (both depend on @aether/core)
+          npm run build --workspace=@aether/adapters
+          npm run build --workspace=@aether/cli
+
+          # 4. Compile knowledge graph using built CLI
           node packages/cli/dist/index.js compile packages/playground/knowledge -o packages/playground/public/graph.json
+
+          # 5. Build the static playground
           npm run build --workspace=@aether/playground
 
       - name: Setup Pages
