@@ -1,78 +1,84 @@
 # Project Aether — Research Artifacts
 
-## Knowledge Computing Platform (KCP)
-
-This directory contains the formal design specifications for **Project Aether**, a Knowledge Computing Platform that introduces a compiler-based architecture between enterprise engineering knowledge and AI execution engines.
+This directory contains all research artifacts for Project Aether: the Knowledge Computing Platform.
 
 ---
 
-## Documents
+## Specification Suite
 
-### Platform Overview
-| File | Description |
-|------|-------------|
-| [aether-platform-overview.md](./aether-platform-overview.md) | High-level flow document — how the platform works end-to-end for users |
+All 10 LAS (Language and Architecture Specification) documents:
 
-### Formal Specifications
-
-| LAS ID | File | Status | Depends On |
-|--------|------|--------|------------|
-| LAS-003 | [LAS-003-knowledge-ontology.md](./specifications/LAS-003-knowledge-ontology.md) | ✅ Complete | — |
-| LAS-005 | [LAS-005-compiler-pass-specification.md](./specifications/LAS-005-compiler-pass-specification.md) | ✅ Complete | LAS-003 |
-| LAS-008 | [LAS-008-cec-specification.md](./specifications/LAS-008-cec-specification.md) | ✅ Complete | LAS-003, LAS-005 |
-| LAS-009 | [LAS-009-model-adapter-specification.md](./specifications/LAS-009-model-adapter-specification.md) | ✅ Complete | LAS-008 |
-| LAS-010 | [LAS-010-runtime-specification.md](./specifications/LAS-010-runtime-specification.md) | ✅ Complete | LAS-003, LAS-005, LAS-008 |
-
----
-
-## Specification Map
-
-```
-LAS-003 Knowledge Ontology
-  └── defines the type system all other specs depend on
-        │
-        ├── LAS-005 Compiler Pass Specification
-        │     └── how enterprise docs are compiled into the Knowledge Graph
-        │
-        ├── LAS-008 CEC Specification
-        │     └── the compiled mission-specific execution package
-        │           │
-        │           └── LAS-009 Model Adapter Specification
-        │                 └── how CEC is rendered for GPT, Claude, MCP, etc.
-        │
-        └── LAS-010 Runtime Specification
-              └── graph traversal, dependency resolution, execution planning
-```
+| ID | Title | Status | Size |
+|----|-------|--------|------|
+| [LAS-001](./specifications/LAS-001-vision.md) | Vision & Design Philosophy | ✅ Draft | ~12 KB |
+| [LAS-002](./specifications/LAS-002-knowledge-theory.md) | Knowledge Theory | ✅ Draft | ~18 KB |
+| [LAS-003](./specifications/LAS-003-knowledge-ontology.md) | Knowledge Ontology | ✅ Draft | ~28 KB |
+| [LAS-004](./specifications/LAS-004-knowledge-definition-language.md) | Knowledge Definition Language | ✅ Draft | ~20 KB |
+| [LAS-005](./specifications/LAS-005-compiler-pass-specification.md) | Compiler Pass Specification | ✅ Draft | ~33 KB |
+| [LAS-006](./specifications/LAS-006-knowledge-ir.md) | Knowledge IR (KIR) | ✅ Draft | ~22 KB |
+| [LAS-007](./specifications/LAS-007-optimization-engine.md) | Optimization Engine | ✅ Draft | ~20 KB |
+| [LAS-008](./specifications/LAS-008-cec-specification.md) | Compiled Execution Context | ✅ Draft | ~24 KB |
+| [LAS-009](./specifications/LAS-009-model-adapter-specification.md) | Model Adapter Protocol | ✅ Draft | ~26 KB |
+| [LAS-010](./specifications/LAS-010-runtime-specification.md) | Runtime Specification | ✅ Draft | ~31 KB |
 
 ---
 
-## Architecture Layers Covered
+## Platform Overview
 
-```
-Layer 1: Knowledge Sources       → Raw enterprise docs (not specified here)
-Layer 2: Knowledge Compiler      → LAS-005 Compiler Pass Specification
-Layer 3: Knowledge Graph         → LAS-003 Knowledge Ontology
-Layer 4: Optimization Passes     → LAS-005 (optimization section)
-Layer 5: Compiled Exec Context   → LAS-008 CEC Specification
-Layer 6: Model Adapter           → LAS-009 Model Adapter Specification
-Layer 7: Execution Engine        → LAS-010 Runtime Specification
-Layer 8: Artifacts               → Output (not specified here)
-```
+- [aether-platform-overview.md](./aether-platform-overview.md) — High-level platform flow, use cases (SDD, General AI, Multi-agent), and the knowledge compilation paradigm explained for first-time readers
+
+## Planning Documents
+
+- [next-steps-research-plan.md](./next-steps-research-plan.md) — 5-track research roadmap: specification, theory, implementation, evaluation, publication/IP
 
 ---
 
 ## Reading Order
 
-**For a new contributor:**
-1. Start with `aether-platform-overview.md` for the conceptual understanding
-2. Read `LAS-003` to understand the knowledge type system
-3. Read `LAS-005` to understand how knowledge is compiled
-4. Read `LAS-008` to understand the CEC output format
-5. Read `LAS-009` to understand model adapter protocol
-6. Read `LAS-010` to understand runtime execution
+**For a first-time reader:**
+1. LAS-001 (Vision) — understand what and why
+2. aether-platform-overview.md — understand the end-to-end flow
+3. LAS-002 (Knowledge Theory) — understand the formal foundation
+4. LAS-003 (Knowledge Ontology) — understand the type system
 
-**For implementation work:**
-- Start with LAS-003 (all code will reference these types)
-- Then LAS-005 (core compiler pipeline)
-- Then LAS-008 + LAS-010 (runtime)
-- Then LAS-009 (adapters, can be built independently)
+**For an implementer:**
+1. LAS-003 → LAS-004 → LAS-006 (types, language, IR)
+2. LAS-005 (compiler passes — the implementation roadmap)
+3. LAS-007 (optimization theory)
+4. LAS-008 → LAS-009 → LAS-010 (CEC, adapters, runtime)
+
+**For a researcher:**
+1. LAS-001 → LAS-002 (vision + theory)
+2. LAS-007 (optimization formal treatment)
+3. Open questions in LAS-002 §8 and next-steps-research-plan.md
+
+---
+
+## Specification Dependency Graph
+
+```
+LAS-001 Vision
+    └── LAS-002 Knowledge Theory
+            └── LAS-003 Knowledge Ontology
+                    ├── LAS-004 KDL Language
+                    │       └── (used by LAS-005 P1 parser)
+                    ├── LAS-005 Compiler Passes
+                    │       ├── LAS-006 Knowledge IR  (working representation)
+                    │       └── LAS-007 Optimization Engine (formal treatment)
+                    ├── LAS-008 CEC Specification
+                    │       └── LAS-009 Model Adapter Protocol
+                    └── LAS-010 Runtime Specification
+                            ├── uses LAS-005 (invokes optimization passes)
+                            ├── uses LAS-006 (creates KIRSubgraph)
+                            └── produces LAS-008 (assembles CEC)
+```
+
+---
+
+## Source Research Data
+
+The `../research-data/` directory contains the original research documents that informed this specification suite:
+
+- `aether-specification-flow.md` — Full architectural distillation and decision log
+- `aether-technical-project-brief.md` — Core architectural rationale and planned deliverables
+- `spect-driven-development-process.md` — Original SDD research that led to Project Aether
