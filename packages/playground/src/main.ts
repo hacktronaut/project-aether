@@ -22,11 +22,16 @@ function log(message: string, type: 'system' | 'mission' | 'result' | 'json' = '
 async function loadGraph() {
   try {
     log('Fetching pre-compiled Knowledge Graph (graph.json)...');
-    const res = await fetch('graph.json'); // Assumes graph.json is in public folder
+    const res = await fetch('graph.json');
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    graphData = await res.json();
+
+    const text = await res.text();
+    if (text.trim().startsWith('<')) {
+      throw new Error('Graph file not found. Please run the compile command first.');
+    }
+    graphData = JSON.parse(text);
     log(`Graph loaded successfully. Nodes: ${Object.keys(graphData.nodes).length}, Edges: ${graphData.edges.length}`);
-    
+
     renderGraph();
   } catch (err: any) {
     log(`Failed to load graph: ${err.message}`, 'system');
@@ -80,7 +85,7 @@ function renderGraph() {
 // Minimal Browser implementation of AetherRuntime
 function executeMission(missionStr: string) {
   log(`❯ aether run --mission "${missionStr}"`, 'mission');
-  
+
   if (!graphData) {
     log('Graph not loaded.', 'system');
     return;
@@ -89,14 +94,14 @@ function executeMission(missionStr: string) {
   // 1. Resolve Anchor Nodes
   const lowerMission = missionStr.toLowerCase();
   const anchorNodes: string[] = [];
-  
+
   const allNodes = Object.values(graphData.nodes) as any[];
   for (const node of allNodes) {
     const scopes = node.rawProperties?.scope?.toLowerCase().split(',').map((s: string) => s.trim()) || [];
     const nameWords = node.name.toLowerCase().split(' ');
-    
+
     if (
-      lowerMission.includes(node.name.toLowerCase()) || 
+      lowerMission.includes(node.name.toLowerCase()) ||
       scopes.some((scope: string) => scope.length > 2 && lowerMission.includes(scope)) ||
       nameWords.some((word: string) => word.length > 3 && lowerMission.includes(word))
     ) {
@@ -151,7 +156,7 @@ function executeMission(missionStr: string) {
       };
     });
     nodesDataSet.update(updates);
-    
+
     // Fit view to active nodes
     network.fit({ nodes: Array.from(visited), animation: true });
   }
@@ -163,7 +168,7 @@ function executeMission(missionStr: string) {
     return {
       id: node.id,
       type: node.type,
-      directive: String(node.name) + (node.description ? ': ' + String(node.description) : ''),
+      directive: node.directive ? `${node.name}: ${node.directive}` : (node.description ? `${node.name}: ${node.description}` : String(node.name)),
       priority: node.priority
     };
   }).filter(Boolean);
@@ -176,6 +181,20 @@ function executeMission(missionStr: string) {
 
   log(`Compiled Execution Context (CEC) Generated [Compression Ratio: ${(cec.header.compressionRatio * 100).toFixed(1)}%]`, 'result');
   log(JSON.stringify(cec, null, 2), 'json');
+
+  // 4. Mock Adapter Output
+  const promptLines = [
+    '--------------------------------------------------',
+    '[Generated LLM System Prompt via Universal Adapter]',
+    'You are an expert AI developer. You must strictly adhere to the following compiled constraints:',
+    ''
+  ];
+  cecConstraints.forEach((c: any, idx: number) => {
+    promptLines.push(`${idx + 1}. [${c.priority}] ${c.directive}`);
+  });
+
+  log('Adapter formatting payload for LLM...', 'system');
+  log(promptLines.join('\n'), 'json');
 }
 
 missionForm.addEventListener('submit', (e) => {
