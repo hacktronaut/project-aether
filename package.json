@@ -7,7 +7,7 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "npm run build --workspaces --if-present",
+    "build": "npm run build --workspace=@aether/kdl && npm run build --workspace=@aether/core && npm run build --workspace=@aether/adapters && npm run build --workspace=@aether/cli",
     "build:core": "npm run build --workspace=packages/core",
     "build:kdl": "npm run build --workspace=packages/kdl",
     "build:adapters": "npm run build --workspace=packages/adapters",

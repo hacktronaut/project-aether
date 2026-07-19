@@ -5,7 +5,7 @@ export class O2SemanticDeduplication implements OptimizationPass {
   readonly id = 'O2';
   readonly name = 'Semantic Deduplication';
 
-  async run(subgraph: KIRSubgraph, mission: any): Promise<void> {
+  async run(subgraph: KIRSubgraph, _mission: any): Promise<void> {
     let duplicatesRemoved = 0;
     const seen = new Map<string, string>(); // 'type:name' -> nodeId
     const nodesToRemove = new Set<string>();
@@ -34,7 +34,7 @@ export class O2SemanticDeduplication implements OptimizationPass {
     }
 
     if (duplicatesRemoved > 0) {
-      console.log(`[O2] Removed ${duplicatesRemoved} duplicate nodes.`);
+      // O2 duplicate nodes removed silently; callers can inspect the subgraph directly
     }
   }
 }

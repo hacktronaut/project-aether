@@ -163,7 +163,7 @@ function executeMission(missionStr: string) {
     return {
       id: node.id,
       type: node.type,
-      directive: node.name + (node.description ? ': ' + node.description : ''),
+      directive: String(node.name) + (node.description ? ': ' + String(node.description) : ''),
       priority: node.priority
     };
   }).filter(Boolean);
@@ -188,4 +188,4 @@ missionForm.addEventListener('submit', (e) => {
 });
 
 // Init
-loadGraph();
+void loadGraph();

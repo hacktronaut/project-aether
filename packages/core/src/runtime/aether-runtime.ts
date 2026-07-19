@@ -28,7 +28,7 @@ export class AetherRuntime {
    */
   async compileMission(input: MissionInput): Promise<CompiledExecutionContext> {
     const cacheDir = join(dirname(this.config.graphPath), 'cache');
-    const hash = createHash('sha256').update(input.raw + (input.scope || []).join(',') + (input.budget || 10)).digest('hex');
+    const hash = createHash('sha256').update(input.raw + (input.scope || []).join(',') + String(input.budget ?? 10)).digest('hex');
     const cacheFile = join(cacheDir, `${hash}.json`);
 
     try {

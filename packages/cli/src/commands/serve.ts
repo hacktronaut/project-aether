@@ -12,7 +12,7 @@ export const serveCommand = new Command('serve')
     const server = fastify({ logger: true });
     await server.register(cors);
 
-    server.post('/compile', async (request, reply) => {
+    server.post('/compile', async (request, _reply) => {
       const config = createDefaultConfig({
         outputGraphPath: resolve(options.graph),
         strict: false

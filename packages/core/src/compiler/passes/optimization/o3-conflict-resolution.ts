@@ -6,7 +6,7 @@ export class O3ConflictResolution implements OptimizationPass {
   readonly id = 'O3';
   readonly name = 'Conflict Resolution';
 
-  async run(subgraph: KIRSubgraph, mission: any): Promise<void> {
+  async run(subgraph: KIRSubgraph, _mission: any): Promise<void> {
     let conflictsResolved = 0;
     const nodesToRemove = new Set<string>();
 
@@ -31,7 +31,7 @@ export class O3ConflictResolution implements OptimizationPass {
     }
     
     if (conflictsResolved > 0) {
-      console.log(`[O3] Resolved ${conflictsResolved} conflicts by priority dropping.`);
+      // O3 conflict nodes dropped silently; callers can inspect the subgraph directly
     }
   }
 }
