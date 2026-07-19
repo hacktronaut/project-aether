@@ -1,0 +1,8 @@
+dist/
+node_modules/
+coverage/
+*.tsbuildinfo
+.changeset/
+CHANGELOG.md
+research-artifacts/
+research-data/

@@ -1,0 +1,74 @@
+{
+  "name": "@aether/adapters",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Project Aether — Model Adapters (OpenAI, Anthropic, MCP, Agent Framework)",
+  "license": "Apache-2.0",
+  "author": "Project Aether Contributors",
+  "homepage": "https://github.com/hacktronaut/project-aether/tree/main/packages/adapters#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hacktronaut/project-aether.git",
+    "directory": "packages/adapters"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./openai": {
+      "import": { "types": "./dist/openai/index.d.ts", "default": "./dist/openai/index.js" },
+      "require": { "types": "./dist/openai/index.d.cts", "default": "./dist/openai/index.cjs" }
+    },
+    "./anthropic": {
+      "import": { "types": "./dist/anthropic/index.d.ts", "default": "./dist/anthropic/index.js" },
+      "require": { "types": "./dist/anthropic/index.d.cts", "default": "./dist/anthropic/index.cjs" }
+    },
+    "./mcp": {
+      "import": { "types": "./dist/mcp/index.d.ts", "default": "./dist/mcp/index.js" },
+      "require": { "types": "./dist/mcp/index.d.cts", "default": "./dist/mcp/index.cjs" }
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist coverage"
+  },
+  "dependencies": {
+    "@aether/core": "^0.1.0",
+    "openai": "^4.52.7",
+    "@anthropic-ai/sdk": "^0.26.1",
+    "tiktoken": "^1.0.15"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.12",
+    "tsup": "^8.2.1",
+    "typescript": "^5.5.3",
+    "vitest": "^2.0.4"
+  },
+  "keywords": [
+    "aether",
+    "model-adapter",
+    "openai",
+    "anthropic",
+    "mcp",
+    "llm"
+  ]
+}

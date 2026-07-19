@@ -1,0 +1,8 @@
+import { defineWorkspace } from 'vitest/config';
+
+export default defineWorkspace([
+  'packages/core/vitest.config.ts',
+  'packages/kdl/vitest.config.ts',
+  'packages/adapters/vitest.config.ts',
+  'packages/cli/vitest.config.ts',
+]);

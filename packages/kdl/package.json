@@ -1,0 +1,58 @@
+{
+  "name": "@aether/kdl",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Project Aether — Knowledge Definition Language (KDL) parser and validator",
+  "license": "Apache-2.0",
+  "author": "Project Aether Contributors",
+  "homepage": "https://github.com/hacktronaut/project-aether/tree/main/packages/kdl#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hacktronaut/project-aether.git",
+    "directory": "packages/kdl"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist coverage"
+  },
+  "dependencies": {
+    "@aether/core": "^0.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.12",
+    "tsup": "^8.2.1",
+    "typescript": "^5.5.3",
+    "vitest": "^2.0.4"
+  },
+  "keywords": [
+    "aether",
+    "kdl",
+    "knowledge-definition-language",
+    "parser",
+    "dsl"
+  ]
+}

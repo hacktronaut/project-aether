@@ -1,0 +1,72 @@
+{
+  "name": "@aether/core",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Project Aether — Knowledge Compiler, Graph, CEC, and Runtime",
+  "license": "Apache-2.0",
+  "author": "Project Aether Contributors",
+  "homepage": "https://github.com/hacktronaut/project-aether/tree/main/packages/core#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hacktronaut/project-aether.git",
+    "directory": "packages/core"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist coverage"
+  },
+  "dependencies": {
+    "unified": "^11.0.4",
+    "remark-parse": "^11.0.0",
+    "mdast-util-from-markdown": "^2.0.0",
+    "mdast-util-to-string": "^4.0.0",
+    "js-yaml": "^4.1.0",
+    "graphology": "^0.25.4",
+    "graphology-traversal": "^0.3.1",
+    "graphology-shortest-path": "^2.0.1",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "@libsql/client": "^0.14.0"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
+    "@types/mdast": "^4.0.4",
+    "@types/unist": "^3.0.3",
+    "@types/node": "^20.14.12",
+    "tsup": "^8.2.1",
+    "typescript": "^5.5.3",
+    "vitest": "^2.0.4"
+  },
+  "keywords": [
+    "aether",
+    "knowledge-compiler",
+    "knowledge-graph",
+    "cec",
+    "llm",
+    "ai"
+  ]
+}

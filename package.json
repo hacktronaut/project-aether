@@ -1,0 +1,76 @@
+{
+  "name": "project-aether",
+  "version": "0.0.0",
+  "private": true,
+  "description": "The Knowledge Computing Platform — compiler infrastructure for AI-native software engineering",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "build:core": "npm run build --workspace=packages/core",
+    "build:kdl": "npm run build --workspace=packages/kdl",
+    "build:adapters": "npm run build --workspace=packages/adapters",
+    "build:cli": "npm run build --workspace=packages/cli",
+    "test": "vitest run --workspace vitest.workspace.ts",
+    "test:watch": "vitest --workspace vitest.workspace.ts",
+    "test:coverage": "vitest run --workspace vitest.workspace.ts --coverage",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "lint": "eslint \"packages/*/src/**/*.ts\"",
+    "lint:fix": "eslint \"packages/*/src/**/*.ts\" --fix",
+    "format": "prettier --write \"packages/*/src/**/*.ts\"",
+    "format:check": "prettier --check \"packages/*/src/**/*.ts\"",
+    "clean": "npm run clean --workspaces --if-present",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "npm run build && changeset publish",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.7",
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
+    "@typescript-eslint/eslint-plugin": "^7.16.0",
+    "@typescript-eslint/parser": "^7.16.0",
+    "@vitest/coverage-v8": "^2.0.4",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.7",
+    "prettier": "^3.3.3",
+    "tsup": "^8.2.1",
+    "typescript": "^5.5.3",
+    "vitest": "^2.0.4"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,yml,yaml}": [
+      "prettier --write"
+    ]
+  },
+  "keywords": [
+    "ai",
+    "knowledge-compiler",
+    "llm",
+    "enterprise-knowledge",
+    "compiler",
+    "typescript"
+  ],
+  "author": "Project Aether Contributors",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hacktronaut/project-aether.git"
+  },
+  "homepage": "https://github.com/hacktronaut/project-aether#readme",
+  "bugs": {
+    "url": "https://github.com/hacktronaut/project-aether/issues"
+  }
+}
