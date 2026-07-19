@@ -7,7 +7,7 @@ import type { SourceDocument } from '@aether/core';
 export const compileCommand = new Command('compile')
   .description('Compile knowledge sources from a directory into a serialized Knowledge Graph')
   .argument('<source-dir>', 'directory containing markdown/KDL knowledge sources')
-  .option('-o, --output <path>', 'path to write the compiled graph JSON', './.aether/graph.json')
+  .option('-o, --output <path>', 'path to write the compiled graph database', './.aether/graph.db')
   .option('--strict', 'fail compilation on any warning or error', false)
   .action(async (sourceDir, options) => {
     try {
@@ -65,14 +65,15 @@ async function scanDir(dir: string, docs: SourceDocument[]): Promise<void> {
     const fullPath = join(dir, entry.name);
     if (entry.isDirectory()) {
       await scanDir(fullPath, docs);
-    } else if (entry.isFile() && entry.name.endsWith('.md')) {
+    } else if (entry.isFile() && (entry.name.endsWith('.md') || entry.name.endsWith('.kdl'))) {
       const content = await readFile(fullPath, 'utf8');
       const fileStats = await stat(fullPath);
+      const isMd = entry.name.endsWith('.md');
       docs.push({
-        id: `doc:${entry.name.replace(/\.md$/, '').toLowerCase()}`,
+        id: `doc:${entry.name.replace(/\.(md|kdl)$/, '').toLowerCase()}`,
         path: fullPath,
         content,
-        format: 'markdown',
+        format: isMd ? 'markdown' : 'kdl',
         lastModified: fileStats.mtime.toISOString(),
       });
     }

@@ -1,0 +1,23 @@
+Constraint "React UI Standards" {
+  Scope "Frontend, React, UI"
+  Priority "Mandatory"
+  Directive "Use functional components and TailwindCSS. Do not use CSS-in-JS libraries like styled-components."
+}
+
+Rule "React State Management" {
+  Scope "Frontend, React, State, Global"
+  Priority "Recommended"
+  Directive "Prefer Zustand or Context API for simple global state. Avoid Redux unless handling complex, heavily interdependent application states."
+}
+
+Capability "React Router Setup" {
+  Scope "Frontend, Routing, React"
+  Priority "Mandatory"
+  Directive "Use React Router v6 with Data Routers (createBrowserRouter). All dynamic page routes must be lazy-loaded using React.Suspense."
+}
+
+Rule "Component Architecture" {
+  Scope "Frontend, Components, React"
+  Priority "Recommended"
+  Directive "Separate smart (container) components from dumb (presentational) components. Keep presentational components pure and side-effect free."
+}

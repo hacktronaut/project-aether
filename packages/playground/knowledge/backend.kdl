@@ -1,0 +1,35 @@
+Rule "Fastify Performance" {
+  Scope "Backend, Fastify, Performance, Server"
+  Priority "Recommended"
+  Directive "Prefer Fastify over Express for high-throughput microservices due to its lower overhead and schema-based validation."
+}
+
+Rule "Express Legacy Support" {
+  Scope "Backend, Express, Server, Legacy"
+  Priority "Optional"
+  Directive "Use Express only when maintaining legacy APIs or when specific legacy middleware is strictly required."
+}
+
+Constraint "Middleware Architecture" {
+  Scope "Backend, Middleware, Request"
+  Priority "Mandatory"
+  Directive "All API routes must use global error-handling middleware. Do not leak stack traces to the client in production environments."
+}
+
+Constraint "JWT Security" {
+  Scope "Backend, Security, Authentication, JWT, Global"
+  Priority "Mandatory"
+  Directive "JWT tokens must be signed with RS256. Access tokens must expire in 15 minutes, refresh tokens in 7 days."
+}
+
+Rule "REST API Guidelines" {
+  Scope "Backend, REST API, Network"
+  Priority "Mandatory"
+  Directive "All APIs must return structured JSON and adhere to standard HTTP verbs (GET, POST, PUT, DELETE)."
+}
+
+Rule "Database Abstraction" {
+  Scope "Backend, Database, SQL"
+  Priority "Mandatory"
+  Directive "Use PostgreSQL for all relational data. Always use an ORM or Query Builder to prevent SQL injection."
+}

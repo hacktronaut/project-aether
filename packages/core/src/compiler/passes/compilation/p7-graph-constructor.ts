@@ -3,6 +3,7 @@ import { dirname } from 'path';
 import type { CompilerPass, CompilationUnit } from '../../types.js';
 import { InMemoryGraph } from '../../../graph/in-memory-graph.js';
 import { serializeGraph } from '../../../ontology/serialization.js';
+import { SQLiteGraphRepository } from '../../../graph/sqlite-repository.js';
 import { NodeType, Priority, Scope, NodeStatus, StabilityLevel, EdgeType } from '../../../ontology/index.js';
 import type { KnowledgeNode, Edge } from '../../../ontology/index.js';
 
@@ -113,10 +114,17 @@ export class P7GraphConstructor implements CompilerPass {
     }
 
     // 3. Save serialized graph to disk
-    const json = serializeGraph(graph);
     const outputPath = unit.config.outputGraphPath;
     await mkdir(dirname(outputPath), { recursive: true });
-    await writeFile(outputPath, json, 'utf8');
+
+    if (outputPath.endsWith('.db')) {
+      const sqliteRepo = new SQLiteGraphRepository(outputPath);
+      await sqliteRepo.saveGraph(graph);
+      sqliteRepo.close();
+    } else {
+      const json = serializeGraph(graph);
+      await writeFile(outputPath, json, 'utf8');
+    }
 
     unit.passResults.push({
       passId: this.id,

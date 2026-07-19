@@ -1,0 +1,17 @@
+Constraint "Monorepo Folder Structure" {
+  Scope "Architecture, Folder Structure, Global"
+  Priority "Mandatory"
+  Directive "Use a monorepo setup via NPM/PNPM workspaces. Apps go in /apps, shared libraries in /packages. Code MUST not import relatively across these boundaries."
+}
+
+Rule "Full Stack Data Flow" {
+  Scope "Architecture, Full Stack, Data Flow"
+  Priority "Mandatory"
+  Directive "Data flow should be strictly unidirectional: DB -> Repository -> Service Layer -> Controller -> API -> Frontend Store -> React Component."
+}
+
+Capability "Edge Caching Architecture" {
+  Scope "Architecture, Caching, Edge, Global"
+  Priority "Recommended"
+  Directive "Implement CDN and edge-caching for all static assets and heavily read, infrequently updated API responses (e.g., config data)."
+}

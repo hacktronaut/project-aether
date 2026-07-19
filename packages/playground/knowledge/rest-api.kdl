@@ -1,0 +1,17 @@
+Rule "REST API Guidelines" {
+  Scope "Backend, REST API, Network"
+  Priority "Mandatory"
+  Directive "All APIs must return JSON and use standard HTTP verbs."
+}
+
+Constraint "Authentication Security" {
+  Scope "Backend, API, Security, Global"
+  Priority "Mandatory"
+  Directive "Every user request MUST include a valid JWT token in the Authorization header."
+}
+
+Rule "Database Abstraction" {
+  Scope "Backend, Database"
+  Priority "Mandatory"
+  Directive "Use PostgreSQL for all relational data. Do not use MongoDB for transactions."
+}

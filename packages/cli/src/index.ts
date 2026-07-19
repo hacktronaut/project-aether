@@ -16,6 +16,7 @@
 import { Command } from 'commander';
 import { compileCommand } from './commands/compile.js';
 import { runCommand } from './commands/run.js';
+import { serveCommand } from './commands/serve.js';
 
 const program = new Command();
 
@@ -26,5 +27,6 @@ program
 
 program.addCommand(compileCommand);
 program.addCommand(runCommand);
+program.addCommand(serveCommand);
 
 program.parse();

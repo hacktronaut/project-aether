@@ -1,7 +1,8 @@
 import { unified } from 'unified';
 import remarkParse from 'remark-parse';
+import { parseKdl } from '@aether/kdl';
 import type { Root, Content, Heading } from 'mdast';
-import type { CompilerPass, CompilationUnit, DocumentAST, Section, Block } from '../../types.js';
+import type { CompilerPass, CompilationUnit, SourceDocument, DocumentAST, Section, Block } from '../../types.js';
 
 /**
  * P1DocumentParser parses source documents (Markdown, YAML, JSON) into standard DocumentASTs.
@@ -20,6 +21,8 @@ export class P1DocumentParser implements CompilerPass {
         let ast: DocumentAST;
         if (doc.format === 'markdown') {
           ast = this.parseMarkdown(doc);
+        } else if (doc.format === 'kdl') {
+          ast = this.parseKdlFormat(doc);
         } else if (doc.format === 'yaml' || doc.format === 'json') {
           ast = this.parseStructured(doc);
         } else {
@@ -162,6 +165,42 @@ export class P1DocumentParser implements CompilerPass {
       return node.children.map((c: any) => this.getMarkdownText(c)).join('');
     }
     return '';
+  }
+
+  private parseKdlFormat(doc: SourceDocument): DocumentAST {
+    const kdlSections = parseKdl(doc.content);
+    const sections: Section[] = [];
+
+    for (const kdlSec of kdlSections) {
+      const blocks: Block[] = [];
+      const properties: string[] = [];
+      for (const [key, value] of Object.entries(kdlSec.properties)) {
+        properties.push(`- ${key.charAt(0).toUpperCase() + key.slice(1)}: ${value}`);
+      }
+      if (properties.length > 0) {
+        blocks.push({
+          type: 'list',
+          content: properties.join('\n'),
+          line: 1,
+          column: 1,
+        });
+      }
+      
+      sections.push({
+        heading: `${kdlSec.type}: ${kdlSec.name}`,
+        level: 1,
+        blocks,
+        children: [],
+      });
+    }
+
+    return {
+      id: doc.id,
+      type: 'kdl',
+      path: doc.path,
+      sections,
+      blocks: [],
+    };
   }
 
   private parseStructured(doc: any): DocumentAST {

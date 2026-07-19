@@ -6,4 +6,6 @@
  */
 
 export type { ModelAdapter } from './types.js';
-export { OpenAIAdapter } from './openai/index.js';
+export * from './openai/index.js';
+export * from './anthropic/index.js';
+export * from './mcp/index.js';

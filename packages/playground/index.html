@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project Aether — Playground</title>
+  </head>
+  <body>
+    <div id="app">
+      <header>
+        <h1>Project Aether 🌌</h1>
+        <p>Interactive Knowledge Compiler & Runtime Playground</p>
+      </header>
+      
+      <main>
+        <section class="panel" id="terminal-panel">
+          <h2>Run Mission</h2>
+          <div class="terminal">
+            <div class="terminal-output" id="output">
+              <div class="log system">Aether OS v0.1.0 loaded.</div>
+              <div class="log system">Graph loaded from /public/graph.json</div>
+            </div>
+            <form id="mission-form">
+              <span class="prompt">❯ aether run --mission</span>
+              <input type="text" id="mission-input" placeholder="e.g. Implement a new REST API" autocomplete="off" />
+            </form>
+          </div>
+        </section>
+        
+        <section class="panel" id="graph-panel">
+          <h2>Compiled Knowledge Graph</h2>
+          <div id="network-container"></div>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

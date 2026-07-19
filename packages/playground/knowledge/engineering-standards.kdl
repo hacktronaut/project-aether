@@ -1,0 +1,17 @@
+Constraint "Changelog Maintenance" {
+  Scope "Engineering, Process, Changelog, Global"
+  Priority "Mandatory"
+  Directive "Every pull request MUST include an update to the CHANGELOG.md following the Keep a Changelog format."
+}
+
+Rule "Code Review Process" {
+  Scope "Engineering, Process, Code Review"
+  Priority "Mandatory"
+  Directive "Code reviews require at least 2 approving reviews before merge. Reviewers must focus on test coverage and edge cases."
+}
+
+Rule "System Documentation" {
+  Scope "Engineering, Documentation, Global"
+  Priority "Recommended"
+  Directive "Maintain architectural decision records (ADRs) in the /docs folder. Update system diagrams when altering core data models."
+}

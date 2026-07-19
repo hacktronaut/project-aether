@@ -6,7 +6,7 @@ import { OpenAIAdapter } from '@aether/adapters';
 export const runCommand = new Command('run')
   .description('Run a mission against the compiled Knowledge Graph to produce a CEC and model payload')
   .requiredOption('--mission <text>', 'the natural language mission or SDD task objective')
-  .option('-g, --graph <path>', 'path to the compiled graph JSON', './.aether/graph.json')
+  .option('-g, --graph <path>', 'path to the compiled graph database', './.aether/graph.db')
   .option('-m, --model <name>', 'target model name', 'gpt-4o')
   .option('-b, --budget <count>', 'context compression budget (max non-mandatory nodes)', '10')
   .action(async (options) => {

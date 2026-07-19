@@ -14,7 +14,7 @@ import type { SourceDocument } from '../../src/index.js';
 
 describe('Project Aether MVP Integration Pipeline', () => {
   const outputDir = join(__dirname, '../../tests/fixtures/output');
-  const graphPath = join(outputDir, 'graph.json');
+  const graphPath = join(outputDir, 'graph.db');
 
   const sourceDocs: SourceDocument[] = [
     {
@@ -56,7 +56,11 @@ describe('Project Aether MVP Integration Pipeline', () => {
   });
 
   afterAll(async () => {
-    await rm(outputDir, { recursive: true, force: true });
+    try {
+      await rm(outputDir, { recursive: true, force: true });
+    } catch (e) {
+      // Ignore EBUSY from SQLite file lock in test runner
+    }
   });
 
   it('compiles documents, loads graph, runs optimizations, and adapts to OpenAI payload', async () => {
@@ -69,7 +73,7 @@ describe('Project Aether MVP Integration Pipeline', () => {
     const unit = await compiler.compile(sourceDocs);
 
     expect(unit.diagnostics.length).toBe(0);
-    expect(unit.passResults.length).toBe(3); // P1, P2, P7
+    expect(unit.passResults.length).toBe(5); // P1, P2, P3, P4, P7
 
     // Verify P7 constructed nodes
     const finalNodes = Array.from(unit.kirModule.nodes.values());

@@ -1,9 +1,13 @@
-import { readFile } from 'fs/promises';
-import { randomUUID } from 'crypto';
+import { readFile, mkdir, writeFile, stat } from 'fs/promises';
+import { randomUUID, createHash } from 'crypto';
+import { join, dirname } from 'path';
 import type { CompiledExecutionContext } from '../cec/types.js';
 import { InMemoryGraph } from '../graph/in-memory-graph.js';
 import { deserializeGraph } from '../ontology/serialization.js';
+import { SQLiteGraphRepository } from '../graph/sqlite-repository.js';
 import { O1DeadKnowledgeElimination } from '../compiler/passes/optimization/o1-dead-knowledge-elimination.js';
+import { O2SemanticDeduplication } from '../compiler/passes/optimization/o2-semantic-deduplication.js';
+import { O3ConflictResolution } from '../compiler/passes/optimization/o3-conflict-resolution.js';
 import { O4ContextCompression } from '../compiler/passes/optimization/o4-context-compression.js';
 import { CECAssembler } from '../cec/assembler.js';
 import type { KIRSubgraph, KIRNode, KIREdge } from '../kir/types.js';
@@ -23,10 +27,33 @@ export class AetherRuntime {
    * Resolves a natural language mission against the knowledge graph, optimizes context, and compiles the Compiled Execution Context (CEC).
    */
   async compileMission(input: MissionInput): Promise<CompiledExecutionContext> {
+    const cacheDir = join(dirname(this.config.graphPath), 'cache');
+    const hash = createHash('sha256').update(input.raw + (input.scope || []).join(',') + (input.budget || 10)).digest('hex');
+    const cacheFile = join(cacheDir, `${hash}.json`);
+
+    try {
+      const graphStat = await stat(this.config.graphPath);
+      const cacheStat = await stat(cacheFile);
+      if (cacheStat.mtimeMs > graphStat.mtimeMs) {
+        // Cache is fresh compared to graph
+        const cached = await readFile(cacheFile, 'utf8');
+        return JSON.parse(cached) as CompiledExecutionContext;
+      }
+    } catch {
+      // Cache miss or stat failed, proceed with compilation
+    }
+
     // 1. Load and deserialize graph
-    const graphJson = await readFile(this.config.graphPath, 'utf8');
-    const graph = new InMemoryGraph('runtime-temp');
-    deserializeGraph(graphJson, graph);
+    let graph: InMemoryGraph;
+    if (this.config.graphPath.endsWith('.db')) {
+      const sqliteRepo = new SQLiteGraphRepository(this.config.graphPath);
+      graph = (await sqliteRepo.loadGraph('runtime-temp')) as InMemoryGraph;
+      sqliteRepo.close();
+    } else {
+      const graphJson = await readFile(this.config.graphPath, 'utf8');
+      graph = new InMemoryGraph('runtime-temp');
+      deserializeGraph(graphJson, graph);
+    }
 
     // 2. Resolve anchor nodes by scanning mission text for name or ID keywords
     const anchorNodes: string[] = [];
@@ -155,15 +182,26 @@ export class AetherRuntime {
       budget: input.budget || 10,
     };
 
-    // 4. Run basic O1 + O4 optimizations
+    // 4. Run basic O1-O4 optimizations
     const o1 = new O1DeadKnowledgeElimination();
     await o1.run(subgraph, mission);
+
+    const o2 = new O2SemanticDeduplication();
+    await o2.run(subgraph, mission);
+
+    const o3 = new O3ConflictResolution();
+    await o3.run(subgraph, mission);
 
     const o4 = new O4ContextCompression();
     await o4.run(subgraph, mission);
 
     // 5. Assemble CEC
     const assembler = new CECAssembler();
-    return assembler.assemble(subgraph, mission);
+    const cec = assembler.assemble(subgraph, mission);
+
+    await mkdir(cacheDir, { recursive: true });
+    await writeFile(cacheFile, JSON.stringify(cec), 'utf8');
+
+    return cec;
   }
 }

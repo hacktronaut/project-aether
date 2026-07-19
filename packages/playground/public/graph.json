@@ -1,0 +1,363 @@
+{
+  "id": "77e2dce7-897d-41e3-b58a-3a5b60eb1f7b",
+  "version": "0.1.0",
+  "createdAt": "2026-07-19T09:26:42.461Z",
+  "nodes": [
+    {
+      "id": "constraint:monorepo-folder-structure",
+      "name": "Monorepo Folder Structure",
+      "type": "Constraint",
+      "version": "1.0.0",
+      "createdAt": "2026-07-19T09:26:42.461Z",
+      "updatedAt": "2026-07-19T09:26:42.461Z",
+      "status": "Active",
+      "stability": "Stable",
+      "priority": "Recommended",
+      "scope": [
+        "CrossCutting"
+      ],
+      "tags": [],
+      "confidence": 0.9,
+      "description": "",
+      "directive": "",
+      "constraintType": "Structural",
+      "verificationMethod": "Static check",
+      "impact": "High",
+      "enforcement": "automated"
+    },
+    {
+      "id": "rule:full-stack-data-flow",
+      "name": "Full Stack Data Flow",
+      "type": "Rule",
+      "version": "1.0.0",
+      "createdAt": "2026-07-19T09:26:42.461Z",
+      "updatedAt": "2026-07-19T09:26:42.461Z",
+      "status": "Active",
+      "stability": "Stable",
+      "priority": "Recommended",
+      "scope": [
+        "CrossCutting"
+      ],
+      "tags": [],
+      "confidence": 0.9,
+      "description": "",
+      "directive": "",
+      "category": "Implementation",
+      "enforcement": "Convention",
+      "rationale": ""
+    },
+    {
+      "id": "capability:edge-caching-architecture",
+      "name": "Edge Caching Architecture",
+      "type": "Capability",
+      "version": "1.0.0",
+      "createdAt": "2026-07-19T09:26:42.461Z",
+      "updatedAt": "2026-07-19T09:26:42.461Z",
+      "status": "Active",
+      "stability": "Stable",
+      "priority": "Recommended",
+      "scope": [
+        "CrossCutting"
+      ],
+      "tags": [],
+      "confidence": 0.9,
+      "description": ""
+    },
+    {
+      "id": "rule:fastify-performance",
+      "name": "Fastify Performance",
+      "type": "Rule",
+      "version": "1.0.0",
+      "createdAt": "2026-07-19T09:26:42.461Z",
+      "updatedAt": "2026-07-19T09:26:42.461Z",
+      "status": "Active",
+      "stability": "Stable",
+      "priority": "Recommended",
+      "scope": [
+        "CrossCutting"
+      ],
+      "tags": [],
+      "confidence": 0.9,
+      "description": "",
+      "directive": "",
+      "category": "Implementation",
+      "enforcement": "Convention",
+      "rationale": ""
+    },
+    {
+      "id": "rule:express-legacy-support",
+      "name": "Express Legacy Support",
+      "type": "Rule",
+      "version": "1.0.0",
+      "createdAt": "2026-07-19T09:26:42.461Z",
+      "updatedAt": "2026-07-19T09:26:42.462Z",
+      "status": "Active",
+      "stability": "Stable",
+      "priority": "Recommended",
+      "scope": [
+        "CrossCutting"
+      ],
+      "tags": [],
+      "confidence": 0.9,
+      "description": "",
+      "directive": "",
+      "category": "Implementation",
+      "enforcement": "Convention",
+      "rationale": ""
+    },
+    {
+      "id": "constraint:middleware-architecture",
+      "name": "Middleware Architecture",
+      "type": "Constraint",
+      "version": "1.0.0",
+      "createdAt": "2026-07-19T09:26:42.461Z",
+      "updatedAt": "2026-07-19T09:26:42.462Z",
+      "status": "Active",
+      "stability": "Stable",
+      "priority": "Recommended",
+      "scope": [
+        "CrossCutting"
+      ],
+      "tags": [],
+      "confidence": 0.9,
+      "description": "",
+      "directive": "",
+      "constraintType": "Structural",
+      "verificationMethod": "Static check",
+      "impact": "High",
+      "enforcement": "automated"
+    },
+    {
+      "id": "constraint:jwt-security",
+      "name": "JWT Security",
+      "type": "Constraint",
+      "version": "1.0.0",
+      "createdAt": "2026-07-19T09:26:42.461Z",
+      "updatedAt": "2026-07-19T09:26:42.462Z",
+      "status": "Active",
+      "stability": "Stable",
+      "priority": "Recommended",
+      "scope": [
+        "CrossCutting"
+      ],
+      "tags": [],
+      "confidence": 0.9,
+      "description": "",
+      "directive": "",
+      "constraintType": "Structural",
+      "verificationMethod": "Static check",
+      "impact": "High",
+      "enforcement": "automated"
+    },
+    {
+      "id": "rule:rest-api-guidelines",
+      "name": "REST API Guidelines",
+      "type": "Rule",
+      "version": "1.0.0",
+      "createdAt": "2026-07-19T09:26:42.461Z",
+      "updatedAt": "2026-07-19T09:26:42.462Z",
+      "status": "Active",
+      "stability": "Stable",
+      "priority": "Recommended",
+      "scope": [
+        "CrossCutting"
+      ],
+      "tags": [],
+      "confidence": 0.9,
+      "description": "",
+      "directive": "",
+      "category": "Implementation",
+      "enforcement": "Convention",
+      "rationale": ""
+    },
+    {
+      "id": "rule:database-abstraction",
+      "name": "Database Abstraction",
+      "type": "Rule",
+      "version": "1.0.0",
+      "createdAt": "2026-07-19T09:26:42.461Z",
+      "updatedAt": "2026-07-19T09:26:42.462Z",
+      "status": "Active",
+      "stability": "Stable",
+      "priority": "Recommended",
+      "scope": [
+        "CrossCutting"
+      ],
+      "tags": [],
+      "confidence": 0.9,
+      "description": "",
+      "directive": "",
+      "category": "Implementation",
+      "enforcement": "Convention",
+      "rationale": ""
+    },
+    {
+      "id": "constraint:changelog-maintenance",
+      "name": "Changelog Maintenance",
+      "type": "Constraint",
+      "version": "1.0.0",
+      "createdAt": "2026-07-19T09:26:42.461Z",
+      "updatedAt": "2026-07-19T09:26:42.462Z",
+      "status": "Active",
+      "stability": "Stable",
+      "priority": "Recommended",
+      "scope": [
+        "CrossCutting"
+      ],
+      "tags": [],
+      "confidence": 0.9,
+      "description": "",
+      "directive": "",
+      "constraintType": "Structural",
+      "verificationMethod": "Static check",
+      "impact": "High",
+      "enforcement": "automated"
+    },
+    {
+      "id": "rule:code-review-process",
+      "name": "Code Review Process",
+      "type": "Rule",
+      "version": "1.0.0",
+      "createdAt": "2026-07-19T09:26:42.461Z",
+      "updatedAt": "2026-07-19T09:26:42.462Z",
+      "status": "Active",
+      "stability": "Stable",
+      "priority": "Recommended",
+      "scope": [
+        "CrossCutting"
+      ],
+      "tags": [],
+      "confidence": 0.9,
+      "description": "",
+      "directive": "",
+      "category": "Implementation",
+      "enforcement": "Convention",
+      "rationale": ""
+    },
+    {
+      "id": "rule:system-documentation",
+      "name": "System Documentation",
+      "type": "Rule",
+      "version": "1.0.0",
+      "createdAt": "2026-07-19T09:26:42.461Z",
+      "updatedAt": "2026-07-19T09:26:42.462Z",
+      "status": "Active",
+      "stability": "Stable",
+      "priority": "Recommended",
+      "scope": [
+        "CrossCutting"
+      ],
+      "tags": [],
+      "confidence": 0.9,
+      "description": "",
+      "directive": "",
+      "category": "Implementation",
+      "enforcement": "Convention",
+      "rationale": ""
+    },
+    {
+      "id": "constraint:react-ui-standards",
+      "name": "React UI Standards",
+      "type": "Constraint",
+      "version": "1.0.0",
+      "createdAt": "2026-07-19T09:26:42.461Z",
+      "updatedAt": "2026-07-19T09:26:42.462Z",
+      "status": "Active",
+      "stability": "Stable",
+      "priority": "Recommended",
+      "scope": [
+        "CrossCutting"
+      ],
+      "tags": [],
+      "confidence": 0.9,
+      "description": "",
+      "directive": "",
+      "constraintType": "Structural",
+      "verificationMethod": "Static check",
+      "impact": "High",
+      "enforcement": "automated"
+    },
+    {
+      "id": "rule:react-state-management",
+      "name": "React State Management",
+      "type": "Rule",
+      "version": "1.0.0",
+      "createdAt": "2026-07-19T09:26:42.461Z",
+      "updatedAt": "2026-07-19T09:26:42.462Z",
+      "status": "Active",
+      "stability": "Stable",
+      "priority": "Recommended",
+      "scope": [
+        "CrossCutting"
+      ],
+      "tags": [],
+      "confidence": 0.9,
+      "description": "",
+      "directive": "",
+      "category": "Implementation",
+      "enforcement": "Convention",
+      "rationale": ""
+    },
+    {
+      "id": "capability:react-router-setup",
+      "name": "React Router Setup",
+      "type": "Capability",
+      "version": "1.0.0",
+      "createdAt": "2026-07-19T09:26:42.461Z",
+      "updatedAt": "2026-07-19T09:26:42.462Z",
+      "status": "Active",
+      "stability": "Stable",
+      "priority": "Recommended",
+      "scope": [
+        "CrossCutting"
+      ],
+      "tags": [],
+      "confidence": 0.9,
+      "description": ""
+    },
+    {
+      "id": "rule:component-architecture",
+      "name": "Component Architecture",
+      "type": "Rule",
+      "version": "1.0.0",
+      "createdAt": "2026-07-19T09:26:42.461Z",
+      "updatedAt": "2026-07-19T09:26:42.462Z",
+      "status": "Active",
+      "stability": "Stable",
+      "priority": "Recommended",
+      "scope": [
+        "CrossCutting"
+      ],
+      "tags": [],
+      "confidence": 0.9,
+      "description": "",
+      "directive": "",
+      "category": "Implementation",
+      "enforcement": "Convention",
+      "rationale": ""
+    },
+    {
+      "id": "constraint:authentication-security",
+      "name": "Authentication Security",
+      "type": "Constraint",
+      "version": "1.0.0",
+      "createdAt": "2026-07-19T09:26:42.461Z",
+      "updatedAt": "2026-07-19T09:26:42.462Z",
+      "status": "Active",
+      "stability": "Stable",
+      "priority": "Recommended",
+      "scope": [
+        "CrossCutting"
+      ],
+      "tags": [],
+      "confidence": 0.9,
+      "description": "",
+      "directive": "",
+      "constraintType": "Structural",
+      "verificationMethod": "Static check",
+      "impact": "High",
+      "enforcement": "automated"
+    }
+  ],
+  "edges": []
+}

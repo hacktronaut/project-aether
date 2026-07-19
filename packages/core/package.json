@@ -40,23 +40,24 @@
     "clean": "rm -rf dist coverage"
   },
   "dependencies": {
-    "unified": "^11.0.4",
-    "remark-parse": "^11.0.0",
-    "mdast-util-from-markdown": "^2.0.0",
-    "mdast-util-to-string": "^4.0.0",
-    "js-yaml": "^4.1.0",
-    "graphology": "^0.25.4",
-    "graphology-traversal": "^0.3.1",
-    "graphology-shortest-path": "^2.0.1",
+    "@aether/kdl": "^0.1.0",
+    "@libsql/client": "^0.14.0",
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1",
-    "@libsql/client": "^0.14.0"
+    "graphology": "^0.25.4",
+    "graphology-shortest-path": "^2.0.1",
+    "graphology-traversal": "^0.3.1",
+    "js-yaml": "^4.1.0",
+    "mdast-util-from-markdown": "^2.0.0",
+    "mdast-util-to-string": "^4.0.0",
+    "remark-parse": "^11.0.0",
+    "unified": "^11.0.4"
   },
   "devDependencies": {
     "@types/js-yaml": "^4.0.9",
     "@types/mdast": "^4.0.4",
-    "@types/unist": "^3.0.3",
     "@types/node": "^20.14.12",
+    "@types/unist": "^3.0.3",
     "tsup": "^8.2.1",
     "typescript": "^5.5.3",
     "vitest": "^2.0.4"
