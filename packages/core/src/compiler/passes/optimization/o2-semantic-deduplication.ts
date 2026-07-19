@@ -1,4 +1,5 @@
-import type { OptimizationPass, KIRSubgraph } from '../../types.js';
+import type { OptimizationPass } from '../../types.js';
+import type { KIRSubgraph } from '../../../kir/types.js';
 
 export class O2SemanticDeduplication implements OptimizationPass {
   readonly id = 'O2';
@@ -33,11 +34,7 @@ export class O2SemanticDeduplication implements OptimizationPass {
     }
 
     if (duplicatesRemoved > 0) {
-      subgraph.diagnostics.push({
-        code: 'OPT_O2',
-        message: `O2 removed ${duplicatesRemoved} duplicate nodes.`,
-        severity: 'Info',
-      });
+      console.log(`[O2] Removed ${duplicatesRemoved} duplicate nodes.`);
     }
   }
 }

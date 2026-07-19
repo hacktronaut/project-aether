@@ -32,6 +32,13 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Build all packages (in dependency order)
+        run: |
+          npm run build --workspace=@aether/kdl
+          npm run build --workspace=@aether/core
+          npm run build --workspace=@aether/adapters
+          npm run build --workspace=@aether/cli
+
       - name: Type check
         run: npm run typecheck
 
@@ -40,9 +47,6 @@ jobs:
 
       - name: Format check
         run: npm run format:check
-
-      - name: Build all packages
-        run: npm run build
 
       - name: Run tests
         run: npm test

@@ -1,6 +1,7 @@
 import { randomUUID } from 'crypto';
 import type { CompilerPass, CompilationUnit } from '../../types.js';
 import { EdgeType } from '../../../ontology/index.js';
+import { KIREdgeStatus, EdgeDiscoveryMethod } from '../../../kir/types.js';
 
 /**
  * P3RelationshipDiscoverer extracts semantic relationships (like dependsOn, conflictsWith) 
@@ -28,8 +29,9 @@ export class P3RelationshipDiscoverer implements CompilerPass {
             target,
             type: EdgeType.DependsOn,
             weight: 1.0,
-            status: 'Active',
-            properties: {}
+            status: KIREdgeStatus.Active,
+            discoveryMethod: EdgeDiscoveryMethod.NameMatching,
+            discoveredInPass: this.id,
           });
           edgesCreated++;
         }
@@ -47,8 +49,9 @@ export class P3RelationshipDiscoverer implements CompilerPass {
             target,
             type: EdgeType.ConflictsWith,
             weight: 1.0,
-            status: 'Active',
-            properties: {}
+            status: KIREdgeStatus.Active,
+            discoveryMethod: EdgeDiscoveryMethod.NameMatching,
+            discoveredInPass: this.id,
           });
           edgesCreated++;
         }
@@ -60,7 +63,7 @@ export class P3RelationshipDiscoverer implements CompilerPass {
       passName: this.name,
       durationMs: Date.now() - startTime,
       success: true,
-      stats: { edgesCreated }
+      stats: { nodesCreated: 0, nodesModified: 0, nodesRemoved: 0, edgesCreated, edgesRemoved: 0 }
     });
   }
 }

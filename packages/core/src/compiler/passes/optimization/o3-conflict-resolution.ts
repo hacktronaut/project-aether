@@ -1,4 +1,5 @@
-import type { OptimizationPass, KIRSubgraph } from '../../types.js';
+import type { OptimizationPass } from '../../types.js';
+import type { KIRSubgraph } from '../../../kir/types.js';
 import { EdgeType, Priority } from '../../../ontology/index.js';
 
 export class O3ConflictResolution implements OptimizationPass {
@@ -15,10 +16,10 @@ export class O3ConflictResolution implements OptimizationPass {
         const targetNode = subgraph.nodes.get(edge.target)!;
         
         // Keep Mandatory over Recommended/Optional
-        if (sourceNode.ontologyContext.priority === Priority.Mandatory && targetNode.ontologyContext.priority !== Priority.Mandatory) {
+        if (sourceNode.priority === Priority.Mandatory && targetNode.priority !== Priority.Mandatory) {
           nodesToRemove.add(edge.target);
           conflictsResolved++;
-        } else if (targetNode.ontologyContext.priority === Priority.Mandatory && sourceNode.ontologyContext.priority !== Priority.Mandatory) {
+        } else if (targetNode.priority === Priority.Mandatory && sourceNode.priority !== Priority.Mandatory) {
           nodesToRemove.add(edge.source);
           conflictsResolved++;
         }
@@ -30,11 +31,7 @@ export class O3ConflictResolution implements OptimizationPass {
     }
     
     if (conflictsResolved > 0) {
-      subgraph.diagnostics.push({
-        code: 'OPT_O3',
-        message: `O3 resolved ${conflictsResolved} conflicts by priority dropping.`,
-        severity: 'Warning', 
-      });
+      console.log(`[O3] Resolved ${conflictsResolved} conflicts by priority dropping.`);
     }
   }
 }

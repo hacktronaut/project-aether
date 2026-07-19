@@ -1,4 +1,4 @@
-import type { CompiledExecutionContext } from '@aether/core';
+import type { CompiledExecutionContext, ConstraintEntry, CapabilityRef } from '@aether/core';
 import type { ExecutionEnvelope, ModelAdapter, AdapterOptions } from '../types.js';
 
 export class AnthropicAdapter implements ModelAdapter {
@@ -11,7 +11,7 @@ export class AnthropicAdapter implements ModelAdapter {
     
     if (cec.constraints.length > 0) {
       systemPrompt += "## KNOWLEDGE CONSTRAINTS\n";
-      cec.constraints.forEach(c => {
+      cec.constraints.forEach((c: ConstraintEntry) => {
         systemPrompt += `- ${c.directive}\n`;
       });
       systemPrompt += "\n";
@@ -19,7 +19,7 @@ export class AnthropicAdapter implements ModelAdapter {
 
     if (cec.capabilities.length > 0) {
       systemPrompt += "## CAPABILITIES\n";
-      cec.capabilities.forEach(cap => {
+      cec.capabilities.forEach((cap: CapabilityRef) => {
         systemPrompt += `- ${cap.name} (${cap.capabilityType})\n`;
       });
     }

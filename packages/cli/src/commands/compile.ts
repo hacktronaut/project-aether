@@ -42,7 +42,7 @@ export const compileCommand = new Command('compile')
         }
       }
 
-      const errors = unit.diagnostics.filter((d) => d.severity === 'Error');
+      const errors = unit.diagnostics.filter((d: { severity: string }) => d.severity === 'Error');
       if (errors.length > 0 && options.strict) {
         console.error(`\x1b[31mStrict mode enabled. Compilation failed with ${errors.length} errors.\x1b[0m`);
         process.exit(1);
