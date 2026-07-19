@@ -80,6 +80,34 @@ npx aether serve -p 3000
 - `POST /compile`: Compile a new set of documents.
 - `POST /mission`: Run a mission and return the optimized CEC.
 
+## 💻 CLI Reference
+
+### `aether compile <source-dir>`
+Compile knowledge sources from a directory into a serialized Knowledge Graph.
+
+**Arguments:**
+- `<source-dir>`: Directory containing markdown/KDL knowledge sources.
+
+**Options:**
+- `-o, --output <path>`: Path to write the compiled graph database (default: `./.aether/graph.db`).
+- `--strict`: Fail compilation on any warning or error (default: `false`).
+
+### `aether run`
+Run a mission against the compiled Knowledge Graph to produce a CEC and model payload.
+
+**Options:**
+- `--mission <text>`: **(Required)** The natural language mission or SDD task objective.
+- `-g, --graph <path>`: Path to the compiled graph database (default: `./.aether/graph.db`).
+- `-m, --model <name>`: Target model name (default: `gpt-4o`).
+- `-b, --budget <count>`: Context compression budget, i.e., max non-mandatory nodes (default: `10`).
+
+### `aether serve`
+Start the Aether REST API server.
+
+**Options:**
+- `-p, --port <number>`: Port to listen on (default: `3000`).
+- `-g, --graph <path>`: Path to the compiled graph database (default: `./.aether/graph.db`).
+
 ## 📁 Monorepo Structure
 
 - `@aether/core`: The heart of the system (Compiler, Runtime, Optimizations, Graph).
